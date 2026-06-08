@@ -1,0 +1,242 @@
+useCallback is a React hook that memoizes a function, meaning React will reuse the same function instead of creating a new one on every render.
+
+With useCallback:
+
+=========================
+REACT HOOKS QUICK NOTES
+=========================
+
+----------------------------------
+1. useState()
+----------------------------------
+
+Purpose:
+- Stores data (state) inside a component.
+- Updating state causes re-render.
+
+Syntax:
+
+const [count, setCount] = useState(0);
+
+Example:
+
+const [count, setCount] = useState(0);
+
+<button onClick={() => setCount(count + 1)}>
+  {count}
+</button>
+
+Important:
+- Never modify state directly.
+- Always use setter function.
+
+Wrong:
+count = count + 1;
+
+Correct:
+setCount(count + 1);
+
+Mental Model:
+State changes -> Component re-renders -> UI updates
+
+
+----------------------------------
+2. useEffect()
+----------------------------------
+
+Purpose:
+- Run side effects after rendering.
+
+Common Uses:
+- API Calls
+- Timers
+- Event Listeners
+- Auto-update something when state changes
+
+Syntax:
+
+useEffect(() => {
+   // code
+}, [dependencies]);
+
+------------------------------------------------
+
+Case 1: No Dependency Array
+
+useEffect(() => {
+   console.log("Runs every render");
+});
+
+Runs:
+- Initial render
+- Every re-render
+
+------------------------------------------------
+
+Case 2: Empty Dependency Array
+
+useEffect(() => {
+   console.log("Runs once");
+}, []);
+
+Runs:
+- Only once when component mounts
+
+------------------------------------------------
+
+Case 3: With Dependencies
+
+useEffect(() => {
+   console.log("Counter changed");
+}, [count]);
+
+Runs:
+- Initial render
+- Whenever count changes
+
+------------------------------------------------
+
+Cleanup Function
+
+useEffect(() => {
+   const id = setInterval(() => {
+      console.log("Hello");
+   }, 1000);
+
+   return () => {
+      clearInterval(id);
+   };
+}, []);
+
+Used for:
+- Timers
+- Event listeners
+- WebSockets
+
+Mental Model:
+
+Render
+  ↓
+useEffect runs
+  ↓
+State changes
+  ↓
+Re-render
+  ↓
+useEffect runs again
+
+
+----------------------------------
+3. useCallback()
+----------------------------------
+
+Purpose:
+- Memoizes a function.
+- Prevents creating a new function on every render.
+
+Syntax:
+
+const fn = useCallback(() => {
+   // code
+}, [dependencies]);
+
+Example:
+
+const generatePassword = useCallback(() => {
+   console.log("Generate");
+}, []);
+
+Without useCallback:
+
+function App() {
+   const fn = () => {};
+}
+
+Every render:
+- New function created
+
+With useCallback:
+
+const fn = useCallback(() => {}, []);
+
+Every render:
+- Same function reused
+
+------------------------------------------------
+
+Dependency Array
+
+const fn = useCallback(() => {
+   console.log(count);
+}, [count]);
+
+Runs:
+- New function created only when count changes
+
+------------------------------------------------
+
+Common Usage
+
+const generatePassword = useCallback(() => {
+   // password logic
+}, [length, numberAllowed]);
+
+useEffect(() => {
+   generatePassword();
+}, [generatePassword]);
+
+------------------------------------------------
+
+DP Analogy
+
+useMemo:
+Cache value
+
+useCallback:
+Cache function
+
+Think:
+
+if(dependencies unchanged)
+    reuse old function
+else
+    create new function
+
+------------------------------------------------
+
+Quick Revision
+
+useState
+- Store data
+- Causes re-render
+
+useEffect
+- Run side effects after render
+- API calls, timers, listeners
+
+useCallback
+- Cache function
+- Avoid unnecessary re-renders
+
+----------------------------------
+
+Memory Trick
+
+useState   -> Store data
+
+useEffect  -> Do something after render
+
+useCallback -> Remember a function
+
+----------------------------------
+
+how to make use of copy button which means how to copy the text using the copy button 
+so it can be down using the thing window.navigator.clipboard.writeText(password)
+in this way you can copy the password
+basically by making the function and using the onclick function 
+now to make it better we used useref to make the ui better useRef(null) we can pass the refrence in this
+using useRef this is the use of this now both the lines can communicate
+and now make the same password again and then use the passwordRef.current?.select();
+by this you can select the password
+if you want to select the specific range of words
+then passwordRef.current?.selectRange(0,3) so only first 3 words would get selected

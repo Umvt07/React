@@ -1,0 +1,25 @@
+one more thing in hooks of counter thing where we setCount(count+1) if we do this more than one time i.e
+
+const addValue=()=>{
+    setCount(count+1);
+    setCount(count+1);
+    setCount(count+1);
+    setCount(count+1);
+}
+
+then only one counter will execute basically feature of react as we have discurssed in theory2 that react runs in packages
+so it will overwrite the other counters
+
+what if we explicitely have to do this then we have to write internal callback function to increase the counter
+const addValue=()=>{
+    setCount((prevcounter)=>{
+        return prevcounter+1;
+    });
+   setCount((prevcounter)=>{
+        return prevcounter+1;
+    });
+    setCount((prevcounter)=>{
+        return prevcounter+1;
+    });
+}
+this will increase it the number of time we will write the function

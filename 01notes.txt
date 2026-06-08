@@ -1,0 +1,113 @@
+react->it solves the problem of complex frontend things where suppose a single click on button changes multiple things on the
+website then it solves that problem
+why react created-> phantom(ghost) read problem
+
+react library has two attachments i.e 1-> react-dom and 2-> react native
+
+
+component name must be captalised its a rule so better is to make the file name also capital
+but in vite file name must be jsx but in basicreact it can be .jsx or .js
+jsx-> if html is returning then it should be jsx
+
+JSX is NOT understood by browser.
+Babel converts JSX into normal JavaScript.
+
+in vitee-> we add script
+in react-> through package.json we add script
+
+npm create vite@latest-> basically create react
+wait in jsx button here 
+# React Counter App Notes
+
+A React component is just a JavaScript function that returns UI.
+
+JSX looks like HTML but is actually JavaScript.
+
+```jsx
+<h1>Hello</h1>
+```
+
+Internally converted into:
+
+```js
+React.createElement()
+
+React component must return one parent element.
+basically it should be inside a single container 
+
+# 4. useState
+Used to create state.
+
+const [count, setCount] = useState(0)
+
+
+- `count` → current value
+- `setCount` → updates value
+- `0` → initial value
+
+# 5. State
+State is special React data.
+Changing state re-renders UI.
+```js
+setCount(count + 1)
+```
+Normal variable change does NOT update UI.
+
+```js
+count++
+```
+❌ Wrong
+---
+
+# 6. Event Handling
+
+React uses camelCase events.
+
+```jsx
+<button onClick={addValue}>
+```
+
+NOT:
+
+```jsx
+onclick
+```
+❌ Wrong
+and also addevent listerner will not work it works in real dom elements
+# 7. Function in React
+```jsx
+const addValue = () => {
+  setCount(count + 1)
+}
+```
+Function runs when event occurs.
+---
+
+# 8. Dynamic Values in JSX
+Use `{}` to write JavaScript inside JSX.
+```jsx
+<h1>{count}</h1>
+```
+# 9. Re-rendering
+When state changes:
+```js
+setCount()
+```
+React:
+1. Updates state
+2. Re-runs component
+3. Updates UI
+---
+# 10. Flow of Counter App
+```text
+Component renders
+      ↓
+User clicks button
+      ↓
+onClick triggers function
+      ↓
+setCount updates state
+      ↓
+React re-renders UI
+```
+import { useState } from 'react' -> library for hooks

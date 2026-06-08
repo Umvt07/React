@@ -1,0 +1,214 @@
+createRoot method creates a dom like structure behind the screen so it compares the main dom and its own dom and it just
+updates the things which are actually  updated but browser completely removes the entire dom 
+and repaint the entire dom again which is known as page reload
+but in virtual dom we can trace in a tree like structure and actually can update the things which are actually changed
+suppose some element are dependent on network then in that case suppose if the network request is do this, is to do that...
+and so on so on that case if we contiously update the things it will create problem so react usees an algorithm so that
+they can skip some unnecessary updates and can actually perform ui updation efficiently
+
+earlier react use dato do each uptes as a result of which it creates problem in animations and all
+
+new method->
+incremental rendering-> ability to pause abort or resuse work as new update,ability to assign priority of different kind of updates
+hydration-> first button atte hai par JavaScript nhi hai toh click nhi hota hai at very early
+reconciallation-> same it checks two trees and all browser wala tree and react ka tree(createRoot se jo tree aata hai)
+reconciallation is the algorithm which is known as virtual dom
+
+when you render a react app which means aap jo jsx mai object banate ho wo tree so yeh tree ko render environment pe push kardete hai(via .render method)
+suppose when we update the things using setstate(learn in hooks) so new tree is generated and this tree is then compared with the old tree 
+and important changes are then made
+via some component are not compared but changed completely
+
+key is unique identity of element
+diffing of lists is perform using keys
+This comparison process is called:
+Diffing
+React tries to update ONLY changed parts instead of whole page.
+so to improve the perform give a unique identity to each element to improve the perform as diffing of list is perform using keys
+
+What is Fibre???
+p
+# React Fiber Notes
+
+React Fiber is the new reconciliation engine introduced in React 16.
+
+Earlier React used a simple recursive rendering algorithm where once rendering started React could not stop the work in between and it had to complete the entire rendering process in one go.
+
+Because of this large UI updates could block the main thread and cause:
+- laggy animations
+- delayed user interactions
+- bad scrolling performance
+
+To solve this problem React introduced:
+→ Fiber Architecture
+
+--------------------------------------------------
+
+# What is Fiber?
+
+Fiber is a complete reimplementation of React's reconciliation algorithm.
+
+Fiber allows React to:
+- pause work
+- resume work
+- split work into small units
+- prioritize important updates
+- reuse previous work
+- cancel unnecessary work
+
+Because of this React applications become smoother and more responsive.
+
+--------------------------------------------------
+
+# Main Idea of Fiber
+
+Earlier React rendering was:
+
+→ synchronous
+
+which means once rendering started it could not stop until entire component tree was rendered.
+
+Fiber made rendering:
+
+→ asynchronous and interruptible
+
+This means React can now:
+- pause rendering
+- do higher priority work first
+- continue rendering later
+
+--------------------------------------------------
+
+# Example
+
+Suppose React is rendering a very large component tree and user suddenly clicks a button.
+
+Old React:
+- continues rendering entire tree first
+- user interaction waits
+
+Fiber:
+- pauses rendering work
+- handles user click immediately
+- resumes rendering later
+
+This improves user experience significantly.
+
+--------------------------------------------------
+
+# Fiber Tree
+
+React creates a special Fiber Tree internally.
+
+Each component becomes a Fiber node.
+
+A Fiber node stores:
+- component type
+- props
+- state
+- parent reference
+- child reference
+- sibling reference
+- update information
+
+This tree helps React efficiently manage rendering work.
+
+--------------------------------------------------
+
+# Incremental Rendering
+
+Fiber breaks rendering work into small chunks.
+
+This is called:
+→ Incremental Rendering
+
+Instead of blocking browser for long time React performs rendering in smaller units.
+
+This keeps UI responsive.
+
+--------------------------------------------------
+
+# Priorities in Fiber
+
+Fiber can assign different priorities to updates.
+
+Examples:
+- button click → high priority
+- animation → high priority
+- background data loading → low priority
+
+This helps React perform important updates first.
+
+--------------------------------------------------
+
+# Double Buffering
+
+Fiber keeps:
+- current tree
+- work-in-progress tree
+
+React prepares updates in work-in-progress tree first.
+
+After completion React swaps trees efficiently.
+
+--------------------------------------------------
+
+# Phases in Fiber
+
+There are mainly two phases.
+
+1. Render Phase
+- creates Fiber tree
+- calculates changes
+- can pause/resume/interupt
+
+2. Commit Phase
+- applies changes to real DOM
+- updates UI
+- cannot be interrupted
+
+--------------------------------------------------
+
+# Fiber and Reconciliation
+
+Fiber is the engine that powers reconciliation.
+
+Reconciliation means:
+→ comparing old virtual DOM with new virtual DOM to find changes.
+
+Fiber improves reconciliation performance significantly.
+
+--------------------------------------------------
+
+# Why Fiber is Important?
+
+Fiber enables modern React features like:
+- Concurrent Rendering
+- Suspense
+- Transitions
+- Better animations
+- Smooth UI updates
+
+--------------------------------------------------
+
+# Simple Definition
+
+Fiber is React's modern reconciliation engine which allows React to perform rendering work incrementally, asynchronously, and with priorities to improve performance and user experience.
+
+--------------------------------------------------
+
+# Flow
+
+State Update
+      ↓
+New Fiber Tree Created
+      ↓
+Diffing/Reconciliation
+      ↓
+Priority Scheduling
+      ↓
+Render Phase
+      ↓
+Commit Phase
+      ↓
+Real DOM Updated

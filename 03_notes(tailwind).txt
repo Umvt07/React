@@ -1,0 +1,54 @@
+in this [[prototyes]]-> it means default jabbhi square square brackets aaye toh
+# React + Tailwind + Props Complete Notes
+
+03. Tailwind CSS & Props in React - Detailed Notes
+1. Tailwind CSS Configuration (Vite)
+Why Tailwind?: It is a utility-first CSS framework that allows for rapid UI development without leaving your JSX file (04:00).
+Installation Steps (05:10):
+npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init -p (This creates tailwind.config.js and postcss.config.js).
+Configuration (06:35):
+Update tailwind.config.js to include template paths so Tailwind can scan your files: content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"]
+Add the following directives to your src/index.css file: @tailwind base; @tailwind components; @tailwind utilities;
+Usage: In JSX, use the className attribute instead of the standard class attribute (08:50).
+2. Understanding Props
+Concept: Props (properties) make your components reusable. Instead of hardcoding values, you pass data from a parent component to a child component (14:07).
+Component Structure (15:27):
+It is best practice to keep components in a src/components/ directory.
+Passing Props (18:25):
+In App.jsx, pass custom attributes: ``.
+Receiving Props (23:55):
+The child component receives an object containing all passed properties: function Card(props) { ... }
+Destructuring: To keep code cleaner, destructure the props directly in the function arguments (24:35): function Card({username, btnText}) { ... }
+3. Advanced Props & Best Practices
+Data Types: You can pass strings, variables, numbers, objects, and arrays by wrapping them in curly braces {} (21:00).
+Default Values (28:40):
+To ensure components don't break if a prop is missing, use default parameter syntax: function Card({username, btnText = "Visit Me"}) { ... }
+Key Takeaway: React does not force strict segregation of HTML/CSS/JS. Instead, it groups them by component logic, making code easier to maintain and reuse across your application (14:30).
+React Foundation series concluded. Ready to start building projects!
+
+
+notes by me 
+
+in this we have talked about props suppose we have a card 
+and in card we want to change the names so the changed name
+can be done using props like props.channel
+or props.name etc so yaa using object Destructuring we 
+can destructure the object into its component 
+after that we can pass this component as a variable and can simply
+use that or suppose if that variable didnt pass in the parameter
+then simply we can pass the default name 
+suppose ({channel,name}) these two are coming 
+suppose name didnt come so we can set the name to be default
+({channel,name="Adarsh"}) so if name parameter didnt come 
+we can bydefault set it as Adarsh that is why this work
+
+or suppose we have to pass a another object 
+then these myobject will also get passed in a curly brackets
+{} in this way
+so channel="Adarsh" someobject={myobject}
+
+to make the card appear two times in ui we have to load it two times
+<card />
+<card />
+in this way

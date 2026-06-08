@@ -1,0 +1,18 @@
+in this we wil learn how to make custom hooks
+
+make a hooks folder
+file name useCurrencyInfo.js
+custom hooks can use builtin hooks
+
+so we are using useEffect,useState
+
+function useCurrencyInfo(currenncy){
+    useEffect(()=>{
+        fetch('').them(()=>convert to json).then(()=>access the thing you want to access)
+    },[])
+    return data
+}
+export default useCurrencyInfo
+this is how you make
+
+learn the useID hook 
